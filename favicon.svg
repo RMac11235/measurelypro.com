@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Measurely">
-  <rect width="32" height="32" rx="6" fill="#f0c400"/>
-  <path fill="#1b1713" d="M7 7h4.2l4.8 11.2L20.8 7H25v18h-3.4V13.2L17.2 25h-2.4L10.4 13.2V25H7V7z"/>
-  <path fill="#1b1713" d="M0 26h32v6H0z"/>
-  <path stroke="#f0c400" stroke-width="1" d="M4 32v-5 M8 32v-3 M12 32v-3 M16 32v-5.5 M20 32v-3 M24 32v-3 M28 32v-5"/>
+  <rect width="32" height="32" rx="7" fill="#1b1916"/>
+  <path fill="#f6f1ea" d="M8 8h3.6l4.4 10.2L20.4 8H24v16h-2.9V13.1L17.2 24h-2.4L10.9 13.1V24H8V8z"/>
+  <rect x="8" y="26.2" width="16" height="1.4" fill="#9d4e2c"/>
 </svg>
