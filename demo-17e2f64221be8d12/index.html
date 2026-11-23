@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Measurely demo</title>
+  <style>
+    :root { --green:#0f6e56; --ink:#142824; --paper:#f6f1e8; --card:#fffcf8; --line:#e6dfd4; --muted:#57534e; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; font-family:"Segoe UI",sans-serif; color:var(--ink); background:#1c1917; }
+    main { width:min(400px, calc(100% - 32px)); background:var(--paper); border-radius:20px; padding:28px 24px 32px; box-shadow:0 16px 50px rgba(0,0,0,.35); }
+    h1 { font-size:24px; margin:0 0 8px; }
+    p { margin:0 0 16px; color:var(--muted); }
+    label { display:block; margin:12px 0; font-size:14px; }
+    input { width:100%; min-height:44px; margin-top:6px; padding:8px 12px; border:1px solid var(--line); border-radius:10px; font:inherit; background:var(--card); color:inherit; }
+    button { width:100%; min-height:44px; margin-top:16px; border:0; border-radius:10px; background:var(--green); color:#fff; font:inherit; font-weight:700; cursor:pointer; }
+    button:disabled { opacity:.45; cursor:default; }
+    .err { color:#9a3412; font-weight:700; min-height:1.3em; margin:12px 0 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Measurely demo</h1>
+    <p>Enter the sign-in you were given to open the sample.</p>
+    <form id="gate" autocomplete="on">
+      <label>Email
+        <input type="email" id="email" name="email" required autocomplete="username">
+      </label>
+      <label>Password
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+      </label>
+      <button type="submit" id="go">Open demo</button>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+  </main>
+  <script>
+  (function () {
+    var USER = 'jon@ogresi.com';
+    var PASS_SHA256 = '89e407048013dd95fac45a88c54835a1871421dff348d4d399dfbb3d126542c6';
+    var KEY = 'measurely-demo-17e2f64221be8d12-ok';
+
+    function go() { location.replace("app/"); }
+
+    try {
+      if (sessionStorage.getItem(KEY) === "ok") { go(); return; }
+    } catch (e) {}
+
+    async function sha256hex(text) {
+      var buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return Array.from(new Uint8Array(buf)).map(function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    }
+
+    document.getElementById("gate").addEventListener("submit", async function (ev) {
+      ev.preventDefault();
+      var err = document.getElementById("err");
+      var btn = document.getElementById("go");
+      err.textContent = "";
+      btn.disabled = true;
+      try {
+        var email = document.getElementById("email").value.trim().toLowerCase();
+        var password = document.getElementById("password").value;
+        var hash = await sha256hex(password);
+        if (email === USER && hash === PASS_SHA256) {
+          sessionStorage.setItem(KEY, "ok");
+          go();
+          return;
+        }
+        err.textContent = "That sign-in does not match.";
+      } catch (e) {
+        err.textContent = "Sign-in could not be checked in this browser.";
+      }
+      btn.disabled = false;
+    });
+  })();
+  </script>
+</body>
+</html>

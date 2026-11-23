@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<title>Measurely: Passed Note</title>
+<desc>A short note with a copper check is a measurement the estimator has passed.</desc>
+<rect x="0" y="0" width="512" height="512" rx="112" fill="#F4EFE6"/>
+<rect x="116" y="96" width="250" height="300" rx="32" fill="#1B2430"/>
+<polyline points="156,176 316,176" fill="none" stroke="#F4EFE6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="156,228 286,228" fill="none" stroke="#F4EFE6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="156,280 248,280" fill="none" stroke="#F4EFE6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="348" cy="348" r="58" fill="#D46A32"/>
+<polyline points="316,350 340,378 386,320" fill="none" stroke="#F4EFE6" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

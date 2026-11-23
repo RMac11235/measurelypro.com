@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<title>Measurely: Stage Ring</title>
+<desc>A partial ring around a tick shows the job still moving toward Ready.</desc>
+<rect x="0" y="0" width="512" height="512" rx="112" fill="#1B2430"/>
+<circle cx="256" cy="256" r="168" fill="#F4EFE6"/>
+<circle cx="256" cy="256" r="128" fill="#1B2430"/>
+<polyline points="256,108 271.5,108.8 286.8,111.2 301.7,115.2 316.2,120.8 330,127.8 343,136.3 355,146 366,157 375.7,169 384.2,182 391.2,195.8 396.8,210.3 400.8,225.2 403.2,240.5 404,256 403.2,271.5 400.8,286.8 396.8,301.7 391.2,316.2 384.2,330 375.7,343 366,355 355,366 343,375.7 330,384.2 316.2,391.2 301.7,396.8 286.8,400.8 271.5,403.2 256,404 240.5,403.2 225.2,400.8 210.3,396.8 195.8,391.2 182,384.2 169,375.7 157,366 146,355 136.3,343 127.8,330" fill="none" stroke="#D46A32" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="256,196 256,316" fill="none" stroke="#E4B15A" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
