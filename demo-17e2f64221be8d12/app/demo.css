@@ -291,3 +291,74 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--line); v
   .stage { padding: 0; }
   .phone { width: 100%; min-height: 100vh; border-radius: 0; box-shadow: none; }
 }
+
+.caption {
+  margin: 10px 0 8px;
+  padding: 10px 12px;
+  background: #efe8de;
+  border-radius: 12px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.speech-note, .edit-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 8px 0 0;
+  line-height: 1.4;
+}
+
+.transcript {
+  min-height: 96px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 10px 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.transcript .interim { color: var(--muted); }
+
+.mic-wrap { text-align: center; margin: 8px 0 4px; }
+
+.mic.live {
+  box-shadow: 0 0 0 0 rgba(15, 110, 86, 0.55);
+  animation: pulse 1.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(15, 110, 86, 0.45); }
+  70% { box-shadow: 0 0 0 18px rgba(15, 110, 86, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(15, 110, 86, 0); }
+}
+
+.side-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0 4px;
+}
+
+.side-links a { min-height: 44px; display: inline-flex; align-items: center; }
+
+.summary-table input {
+  width: 100%;
+  min-height: 44px;
+  font-size: 16px;
+}
+
+.summary-table { display: block; overflow-x: auto; }
+
+.counts-line { font-size: 13px; color: var(--muted); }
+
+.ring-wrap.listening .ring-label, .ring-wrap.summarizing .ring-label { color: var(--green); }
+
+@media (max-width: 640px) {
+  .mic { width: 152px; height: 152px; }
+  .ring-wrap, .ring { width: 180px; height: 180px; }
+  .summary-table td, .summary-table th { padding: 8px 6px; font-size: 14px; }
+  h1 { font-size: 28px; }
+}

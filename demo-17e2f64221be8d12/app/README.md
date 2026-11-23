@@ -1,13 +1,15 @@
 # Measurely demo
 
-Clickable sample.  No server, no account, no keys, and no real names.
+Clickable sample of the core walk-in flow.  No server, no account, no keys, and no real names.
 
-1. Open `index.html` in a browser on this PC or on a phone that can open the file.
-2. Choose the phone app or the web portal.
-3. Every screen says `Demo, sample data`.
+1. Sign in at the gate, then the phone opens on the walk-in screen.
+2. Tap the mic and speak rooms, sizes, and counts, or watch the walk-through.
+3. The app turns the spoken words into a room-by-room summary.  You can edit the numbers, then open an estimate and invoice priced from `demo-math.js`.
 
-The phone path is sign in (or the sample seat), Jobs, the voice walk-through with the progress ring, the measurement sheet, the estimate, the invoice, and a DocuSign-style confirmation that stays on the page.  One flooring job and one lighting job are loaded.  English and Spanish switch in the header.  Plan tiers are on the phone Plans tab and on the portal.
+The home chooser, the jobs list, and the web portal are still in the demo, but they are secondary.  Every screen says `Demo, sample data`.
 
-Prices on the screen are computed from `demo-math.js`, which is a display copy of `app/lib/logic/math.dart` and `functions/src/plans.ts`.  Do not invent a third list.  If those files change, change `demo-math.js` to match.
+Live listening uses the browser's Web Speech API.  In Chrome that service is provided by Google.  Nothing is sent to a Measurely server.  Safari, Firefox, and iOS use the typed walk-through instead.
+
+Prices on the estimate are computed from `demo-math.js`, which is a display copy of `app/lib/logic/math.dart` and `functions/src/plans.ts`.  Do not invent a third list.
 
 The confirmation step does not call DocuSign.  The sample CSV is built in the browser from the two sample jobs.

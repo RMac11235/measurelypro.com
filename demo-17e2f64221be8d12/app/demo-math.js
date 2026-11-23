@@ -82,14 +82,60 @@
     ], 7, 250);
   }
 
+  function takeoffFromRooms(rooms, wastePct, boxSize) {
+    boxSize = boxSize || 20;
+    const list = rooms || [];
+    const gross = round4(list.reduce(function (sum, room) {
+      return sum + (room.gross || ((room.length || 0) * (room.width || 0)) || 0);
+    }, 0));
+    const cut = round4(list.reduce(function (sum, room) { return sum + (room.cut || 0); }, 0));
+    const net = round4(list.reduce(function (sum, room) {
+      const roomNet = room.net != null ? room.net : Math.max(0, (room.gross || 0) - (room.cut || 0));
+      return sum + roomNet;
+    }, 0));
+    const withWaste = round4(net * (1 + (wastePct || 0) / 100));
+    const boxes = Math.ceil(withWaste / boxSize - 1e-9);
+    const billable = round4(boxes * boxSize);
+    return { gross: gross, cut: cut, net: net, withWaste: withWaste, boxes: boxes, billable: billable };
+  }
+
+  function priceSummary(summary) {
+    summary = summary || {};
+    const trade = summary.trade || "flooring";
+    const counts = summary.counts || {};
+    if (trade === "lighting") {
+      const rows = [];
+      if (counts.fixtures) {
+        rows.push({ item: "Recessed can", qty: counts.fixtures, unit: "ea", rate: BOOK.RECESSED.material + BOOK.RECESSED.labor });
+      }
+      if (counts.swaps) {
+        rows.push({ item: "Fixture swap", qty: counts.swaps, unit: "ea", rate: BOOK.FIXTURE_SWAP.material + BOOK.FIXTURE_SWAP.labor });
+      }
+      if (!rows.length) {
+        rows.push({ item: "Recessed can", qty: 0, unit: "ea", rate: BOOK.RECESSED.material + BOOK.RECESSED.labor });
+      }
+      return priceLines(rows, 7, 250);
+    }
+    const product = (summary.product && BOOK[summary.product]) ? BOOK[summary.product] : BOOK.LVP;
+    const takeoff = takeoffFromRooms(summary.rooms || [], product.wastePct, 20);
+    const priced = priceLines([
+      { item: product.name + " material", qty: takeoff.billable, unit: "sqft", rate: product.material },
+      { item: product.name + " labor", qty: takeoff.withWaste, unit: "sqft", rate: product.labor },
+    ], 7, 250);
+    priced.takeoff = takeoff;
+    return priced;
+  }
+
   return {
     money: money,
     PLANS: PLANS,
     BOOK: BOOK,
     monthlyPlanUsd: monthlyPlanUsd,
     floorTakeoff: floorTakeoff,
+    takeoffFromRooms: takeoffFromRooms,
     priceFloor: priceFloor,
     priceLight: priceLight,
+    priceSummary: priceSummary,
     WORKFLOW_NEW_USD: 750,
     WORKFLOW_CREDIT_USD: 200,
     SESSION_USD_PER_HOUR: 500,
